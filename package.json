@@ -1,7 +1,7 @@
 {
   "name": "nextjs-route-matcher",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "ava",
     "build": "tsup src"
