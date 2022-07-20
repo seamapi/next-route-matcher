@@ -1,0 +1,17 @@
+{
+  "name": "nextjs-route-matcher",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "build": "tsup src"
+  },
+  "devDependencies": {
+    "ava": "^4.3.1",
+    "esbuild": "^0.14.49",
+    "esbuild-register": "^3.3.3",
+    "esbuild-runner": "^2.2.1",
+    "tsup": "^6.1.3",
+    "typescript": "^4.7.4"
+  }
+}
