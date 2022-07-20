@@ -14,7 +14,9 @@ yarn add next-route-matcher
 ## Usage
 
 ```ts
-const routeMatcher = getRouteMatcher([
+import nextRouteMatcher from "next-route-matcher"
+
+const routeMatcher = nextRouteMatcher([
   "/health",
   "/api/nested",
   "/api/items/[item_name]",
