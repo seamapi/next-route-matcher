@@ -1,11 +1,11 @@
 {
   "name": "next-route-matcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "git@github.com:seamapi/next-route-matcher.git",
   "main": "dist/index.js",
   "scripts": {
     "test": "ava",
-    "build": "tsup src"
+    "build": "tsup src --dts"
   },
   "devDependencies": {
     "ava": "^4.3.1",
