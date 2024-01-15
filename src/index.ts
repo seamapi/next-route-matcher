@@ -1,5 +1,9 @@
-import { getRouteRegex } from "./lib/route-regex"
-import { getRouteMatcherFunc } from "./lib/get-route-matcher-func"
+import { type RouteRegex, getRouteRegex } from "./lib/route-regex"
+import {
+  type RouteMatcherFunc,
+  type RouteParams,
+  getRouteMatcherFunc,
+} from "./lib/get-route-matcher-func"
 
 /**
  * This is the getRouteMatcher function from NextJS- it's got a bit of an ugly
@@ -10,7 +14,14 @@ export const getRouteMatcherUgly = (routeMapping: {
   [route: string]: Function
 }) => {
   // convert each route to a regex
-  const routes: any[] = []
+  const routes: {
+    fsPath: string
+    routeRegex: RouteRegex
+    matcherFunc: RouteMatcherFunc
+    serverFunc: Function
+    priority: number
+  }[] = []
+
   for (const [fsPath, serverFunc] of Object.entries(routeMapping)) {
     const routeRegex = getRouteRegex(fsPath)
     routes.push({
@@ -38,8 +49,14 @@ export const getRouteMatcherUgly = (routeMapping: {
   }
 }
 
-type RouteMatcherOutput = (incomingPath: string) => any
-export const getRouteMatcher = (routes: string[]): RouteMatcherOutput => {
+export type RouteMatcherOutput = {
+  matchedRoute: string
+  routeParams: RouteParams
+}
+
+export type RouteMatcher = (incomingPath: string) => RouteMatcherOutput | null
+
+export const getRouteMatcher = (routes: string[]): RouteMatcher => {
   const routeMapping: any = {}
   for (const route of routes) routeMapping[route] = () => {}
   const uglyMatcher = getRouteMatcherUgly(routeMapping)

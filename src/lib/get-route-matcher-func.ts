@@ -1,9 +1,12 @@
 // https://github.com/vercel/next.js/blob/402f0360cece821b9e0017f6ecb499d129993600/packages/next/shared/lib/router/utils/route-matcher.ts
-import { getRouteRegex } from "./route-regex"
+import type { RouteRegex } from "./route-regex"
 
-export function getRouteMatcherFunc(
-  routeRegex: ReturnType<typeof getRouteRegex>
-) {
+export type RouteParams = { [paramName: string]: string | string[] }
+export type RouteMatcherFunc = (
+  pathname: string | null | undefined
+) => RouteParams | false
+
+export function getRouteMatcherFunc(routeRegex: RouteRegex): RouteMatcherFunc {
   const { re, groups } = routeRegex
   return (pathname: string | null | undefined) => {
     const routeMatch = re.exec(pathname!)
